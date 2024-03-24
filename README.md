@@ -1,56 +1,13 @@
-# node-library-template
+# journalctl
 
->A repository template for a Node.js library.
-
-## Structure
-
-This repository is written in TypeScript and uses [gts](https://github.com/google/gts) for linting and formatting. It is set up to be published to npm automatically using GitHub Actions.
-
-Commits are standardized through Conventional Commits and Semantic Versioning. This is enforced by [commitlint](https://www.npmjs.com/package/@commitlint/cli).
-Pushes to the `master` branch create a new release and publish to npm.
-
-The [lib](./lib) directory contains the library source code.
-The [test](./test) directory contains the tests. Tests are written with [mocha](https://www.npmjs.com/package/mocha) and [chai](https://www.npmjs.com/package/chai).
-
-## Usage
-
-1. Initial setup
-	1. Clone this repository.
-	2. Run `npm install`.
-	3. Run `npm run setup` to set up the project.
-
-2. License
-	1. Choose a license and add it to the `LICENSE` file.
-	2. Change the license badge to the `README.md` file.
-	3. Change the license in the `package.json` file.
-	4. Change the license code in the `.vscode/settings.json` file.
-
-3. Final changes
-	1. Make sure to remove this section from the `README.md` file.
-	2. Change the `README.md` file to describe your project.
-	3. Add a description in the `package.json` file.
-	4. Add the repository secret `NPM_TOKEN` in order for automated npm publishing to work.
-	5. Run `npm install` to clean up the `package-lock.json` file.
-
-4. Begin development!
-
-**BELOW IS THE README FOR THE TEMPLATE REPOSITORY.**
-**REMOVE THIS SECTION FROM YOUR README.**
-
----
----
----
-
-# node-library-template
-
->A repository template for a Node.js library.
+>A wrapper for systemd's journalctl written in TypeScript.
 
 <br>
 
-[![Downloads](https://badgen.net/npm/dt/@pextra/node-library-template)](https://www.npmjs.com/package/@pextra/node-library-template)
-[![npm dependents](https://badgen.net/npm/dependents/@pextra/node-library-template)](https://www.npmjs.com/package/@pextra/node-library-template?activeTab=dependents)
-[![Version](https://badgen.net/npm/v/@pextra/node-library-template)](https://www.npmjs.com/package/@pextra/node-library-template)
-[![License](https://badgen.net/npm/license/@pextra/node-library-template)](https://opensource.org/license/mit/)
+[![Downloads](https://badgen.net/npm/dt/@pextra/journalctl)](https://www.npmjs.com/package/@pextra/journalctl)
+[![npm dependents](https://badgen.net/npm/dependents/@pextra/journalctl)](https://www.npmjs.com/package/@pextra/journalctl?activeTab=dependents)
+[![Version](https://badgen.net/npm/v/@pextra/journalctl)](https://www.npmjs.com/package/@pextra/journalctl)
+[![License](https://badgen.net/npm/license/@pextra/journalctl)](https://opensource.org/license/apache-2-0/)
 
 ## NOTICE
 
@@ -63,12 +20,49 @@ Most commands are implemented, but a few are not yet. Not many of the command op
 ## Install
 
 ```sh
-npm install @pextra/node-library-template
+npm install @pextra/journalctl
 ```
 
 ## Usage
 
-Your usage instructions here.
+The library exports one synchronous function, `RetrieveJournal`, which is used to retrieve journal entries.
+
+It takes one argument, which provides the journalctl command options in a typed manner.
+
+It will return them in the following format:
+
+```typescript
+[
+	{
+		PRIORITY: MessagePriority;
+		FACILITY?: SyslogFacility;
+		IDENTIFIER: string;
+		MESSAGE: string;
+		matches: Record<string, string>;
+	}
+	// More entries...
+]
+```
+
+Example:
+
+```typescript
+import {RetrieveJournal, JournalOptions} from '@pextra/journalctl';
+
+const payload: JournalOptions = {
+	options: {
+		kernel: true,
+		reverse: true,
+	},
+};
+
+const entries = RetrieveJournal(payload); // Array<JournalEntry>
+// Built command: `journalctl --no-pager --output=json -k -r`
+
+console.log(entries); // Journal entries
+```
+
+See [lib/types/index.ts](./lib/types/index.ts) for types.
 
 ## Support/Contact
 
@@ -84,4 +78,4 @@ We use [gts](https://github.com/google/gts) for linting and formatting.
 
 ## License
 
-node-library-template is licensed under the [MIT License](./LICENSE).
+journalctl is licensed under the [Apache 2.0 License](./LICENSE).
