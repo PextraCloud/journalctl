@@ -18,8 +18,8 @@
     "node": ">=14.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^18.4.3",
-    "@commitlint/config-conventional": "^18.4.3",
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
     "@types/node": "^20.11.30",
     "bun-types": "^1.0.33",
     "gts": "^5.2.0",
