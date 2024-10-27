@@ -64,7 +64,7 @@ const entries = RetrieveJournal(payload); // Array<JournalEntry>
 console.log(entries); // Journal entries
 ```
 
-See [lib/types/index.ts](./lib/types/index.ts) for types.
+See [lib/types.ts](./lib/types.ts) for types.
 
 ## Support/Contact
 
