@@ -25,6 +25,8 @@ npm install @pextra/journalctl
 
 ## Usage
 
+After v0.1.1, this library has become ESM-only. You will need to use an ESM-compatible environment to use this library.
+
 The library exports one synchronous function, `RetrieveJournal`, which is used to retrieve journal entries.
 
 It takes one argument, which provides the journalctl command options in a typed manner.
