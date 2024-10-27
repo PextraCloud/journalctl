@@ -40,6 +40,7 @@ describe('RunCommandSync', () => {
 		const payload: JournalOptions = {
 			options: {
 				since: yesterday,
+				lines: 5,
 			},
 		};
 
