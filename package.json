@@ -36,7 +36,7 @@
     "@types/node": "^20.11.30",
     "bun-types": "^1.0.33",
     "gts": "^5.2.0",
-    "husky": "^8.0.3",
+    "husky": "^9.0.0",
     "rollup": "^2.79.2",
     "rollup-plugin-typescript2": "^0.36.0",
     "typescript": "~5.2.0"
